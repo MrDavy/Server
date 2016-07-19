@@ -1,0 +1,78 @@
+create table if not exists insurance(
+id integer primary key auto_increment,
+type integer,image varchar(200),
+price double,title varchar(200),
+suitAges varchar(200),
+suitDesc varchar(200),
+description varchar(200),
+coverageDesc varchar(200),
+beginDate varchar(200)) ;
+
+
+insert into insurance values(null,3,'/img/accident.png',1,'航空意外险','18岁-80岁',
+'适合飞机出行人士','乘坐飞机安全放心','航空意外保障高达500万','2015-06-19 00:00');
+
+///时间表
+create table if not exists time(id integer primary key auto_increment,
+type integer,insureTypeId integer,timeLt integer,timeCompany varchar(20)) character set utf8;
+
+insert into time values(null,3,10,10,"天");
+//类型解释
+create table if not exists mimetype(id integer primary key auto_increment,type integer,typeName varchar(50));
+
+insert into mimetype  values(null,0,"安全随行"),(null,1,"快乐旅游"),(null,2,"钱包安全"),(null,3,"更多保险");
+
+
+//明细表
+create table if not exists detail(id integer primary key auto_increment,type integer
+,title varchar(50),description varchar(200),coverage double,coverageCompany varchar(10),
+insuranceId integer,comboId integer);
+
+insert into detail values
+(null,3,"航空意外身故、残疾保险","被保人以乘客身份乘坐民航客机遭受意外",500,"万元",9,31),
+(null,3,"房屋装修损失","被保人以乘客身份乘坐民航客机遭受意外",20,"万元",8,27)
+,(null,3,"室内财产损失","被保人以乘客身份乘坐民航客机遭受意外",20,"万",8,27),
+(null,3,"附加盗抢综合险","被保人以乘客身份乘坐民航客机遭受意外",10,"万元",8,27);
+
+//套餐表
+create table if not exists combo(id integer primary key auto_increment,type integer,insuranceId integer,name varchar(20)) character set utf8;
+insert into combo values(null,1,5,"基础款");
+insert into combo values(null,3,10,"基础款"),(null,3,10,"标准款"),(null,3,10,"加强款");,(null,2,8,"豪华款"),(null,2,8,"土豪款"),(null,2,8,"任性款");
+
+//用户表
+create table if not exists user(id integer primary key auto_increment,phone varchar(20) unique);
+//投保人与被保人信息表
+create table if not exists applicant(id integer primary key auto_increment ,name varchar(50),
+certificateType varchar(20),certificateNum varchar(50) unique,phone varchar(20),province varchar(20),city varchar(20));
+
+
+create table if not exists recognizee(id integer primary key auto_increment ,name varchar(50),
+certificateType varchar(20),certificateNum varchar(50) unique,phone varchar(20),province varchar(20),city varchar(20));
+
+//订单
+create table if not exists orders(id integer primary key auto_increment,transactionNum BIGINT unique,proposalFormNum BIGINT unique,applicantId integer,
+recognizeeId integer,type integer,insuranceId integer,image varchar(20),title varchar(50),suitAges varchar(50),
+suitDesc varchar(50),description varchar(200),price double,coverageDesc varchar(100),beginDate varchar(20),
+endDate varchar(20),bookDate varchar(20),timeLt integer,comboId integer,payState integer);
+
+
+create table if not exists orders(id integer primary key auto_increment,userPhone varchar(50),transactionNum varchar(50) unique,propsalFormNum varchar(50) unique,
+applicantId integer,recognizeeId integer,insuranceId integer,price double,beginDate varchar(20),endDate varchar(20),bookDate varchar(20),
+timeLt integer ,timeCompany varchar(5),comboId integer,payState enum("待支付","已支付") default "待支付");
+
+//根据下单数查询
+select * from insurance where count>0 order by count desc limit 5;
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,51 @@
+1.列表：0-安全随行，1-快乐旅游，2-钱包安全，3-更多保险
+http://10.221.186.77:8080/insurance/type/1
+get方式请求
+
+2.详情：(末尾1表示id)
+http://10.221.186.77:8080/insurance/detail/1
+get方式请求
+
+3.获取验证码：
+http://10.221.186.77:8080/insurance/code
+get方式请求
+
+4.登陆：
+http://10.221.186.77:8080/insurance/login
+post方式请求：
+参数：
+	手机号 ：phone
+	验证码 ：code
+设置消息头setHeader("cookie","sessionId")
+
+5.订单提交：
+http://10.221.186.77:8080/insurance/ordersub
+post方式请求：
+参数：
+	json类型的订单信息
+	
+6.我的订单：	
+http://10.221.186.77:8080/insurance/order/myorder
+post方式请求
+参数：
+	登陆用户手机号：userPhone
+	
+7.我的保单：	
+http://10.221.186.77:8080/insurance/order/myinsurance
+post方式请求
+参数：
+	登陆用户手机号：phone
+
+
+8.订单详情：(末尾一位为order的id)
+http://10.221.186.77:8080/insurance/orderdetail/1
+get方式请求
+
+	
+	
+	
+	
+	
+	
+	
+	
